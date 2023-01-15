@@ -1,0 +1,13 @@
+{
+  "name": "com.alephvault.unity.boilerplates",
+  "version": "0.0.1",
+  "displayName": "Aleph Vault - Unity - Boilerplates",
+  "description": "Utilities to generate boilerplate code for a project.",
+  "unity": "2020.1",
+  "dependencies": {},
+  "author": {
+    "name": "Aleph Vault",
+    "email": "info@alephvault.com",
+    "url": "http://www.alephvault.com"
+  }
+}
