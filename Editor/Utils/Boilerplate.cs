@@ -98,12 +98,12 @@ namespace AlephVault.Unity.Boilerplates
                 if (directory == null) throw new ArgumentNullException(nameof(directory));
                 
                 directory = directory.Trim();
-                var regex = new Regex("^[A-Z-a-z0-9]+([._-][A-Z-a-z0-9]+)*$");
+                var regex = new Regex("^[A-Z-a-z0-9]+([ ._-][A-Z-a-z0-9]+)*$");
                 if (!regex.Match(directory).Success)
                 {
                     throw new ArgumentException(
                         "Invalid directory name. It must consist of letters and numbers, " +
-                        "perhaps separated by single instances of '-', '_', or '.'"
+                        "perhaps separated by single instances of '-', '_', space or '.'"
                     );
                 }
 
