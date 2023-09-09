@@ -115,32 +115,15 @@ namespace AlephVault.Unity.Boilerplates
             }
 
             /// <summary>
-            ///   Processes the template contents in the same way of <see cref="ProcessTemplateContents"/>
-            ///   but also specifying a script name. This invovles the gneration of 3 new variables, which
-            ///   are compatible to Unity's way of generating scripts:
+            ///   Expands the replacements with script-related information. This invovles the gneration of 3 new
+            ///   variables, which are compatible to Unity's way of generating scripts:
             ///   - SCRIPTNAME: The script name.
             ///   - NAME: The script name.
             ///   - SCRIPTNAME_LOWER: The same as SCRIPTNAME but with the first character to lowercase.
             /// </summary>
-            /// <param name="scriptName">The name of the script (it should NOT include the extension!)</param>
-            /// <param name="contents">The string contents to parse</param>
-            /// <param name="replacements">The replacements to apply to each #TEMPLATE_VARIABLE#</param>
-            /// <param name="errorOnIncompleteTags">
-            ///   Whether to treat chunks #like_this as erroneous / incomplete markers (raising
-            ///   an error) or treat it like plain text (default behaviour, and compatible with
-            ///   Unity code templates processing)
-            /// </param>
-            /// <returns>The processed template</returns>
-            /// <exception cref="InvalidTemplateMarkerException">
-            ///   A marker has invalid syntax, or is incomplete and <para>errorOnIncompleteTags</para>
-            ///   is <c>true</c>.
-            /// </exception>
-            /// <exception cref="TemplateKeyNotFoundException">
-            ///   A template key was not found among the replacements.
-            /// </exception>
-            public static string ProcessScriptTemplateContents(
-                string scriptName, string contents, Dictionary<string, string> replacements,
-                bool errorOnIncompleteTags = false
+            /// <returns>The new replacements dictionary</returns>
+            public static Dictionary<string, string> AddScriptTemplateVariables(
+                string scriptName, Dictionary<string, string> replacements
             )
             {
                 Dictionary<string, string> newReplacements = new Dictionary<string, string>(replacements);
@@ -148,7 +131,7 @@ namespace AlephVault.Unity.Boilerplates
                 newReplacements["NAME"] = scriptName;
                 newReplacements["SCRIPTNAME_LOWER"] = scriptName.Substring(0, 1).ToLower() +
                                                       scriptName.Substring(1);
-                return ProcessTemplateContents(contents, newReplacements);
+                return newReplacements;
             }
         }
     }

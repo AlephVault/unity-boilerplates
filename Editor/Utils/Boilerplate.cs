@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -172,7 +171,7 @@ namespace AlephVault.Unity.Boilerplates
             ///     [A-Z](_*[A-Z0-9]+)* or it will be an error.
             /// </summary>
             /// <returns>An action to be used inside of <see cref="Do" /></returns>
-            public static Action<Boilerplate, string> InstantiateScriptCodeTemplate(
+            public static Action<Boilerplate, string> InstantiateTemplate(
                 TextAsset source, string targetScriptName, Dictionary<string, string> replacements,
                 bool errorOnIncompleteTags = false
             ) {
@@ -188,12 +187,35 @@ namespace AlephVault.Unity.Boilerplates
                     Debug.Log($"Target file: {fullFilePath}");
                     using (StreamWriter outfile = new StreamWriter(fullFilePath))
                     {
-                        outfile.Write(TemplateReplacer.ProcessScriptTemplateContents(
-                            targetScriptName, contents, replacements, errorOnIncompleteTags
+                        outfile.Write(TemplateReplacer.ProcessTemplateContents(
+                            contents, replacements, errorOnIncompleteTags
                         ));
                     }
                     AssetDatabase.Refresh();
                 };
+            }
+            
+            /// <summary>
+            ///   Returns an action that instantiates a script (i.e. a ".cs" asset) from
+            ///   a code template. The criteria to do this involves the following:
+            ///   - #SCRIPTNAME# corresponds to the new script name (without .cs extension).
+            ///   - #SCRIPTNAME_LOWER# corresponds to the camelCase (instead of PascalCase)
+            ///     name of the script.
+            ///   - #NAME# is an alias to #SCRIPTNAME#.
+            ///   - ## corresponds to a single #.
+            ///   - #CUSTOM_KEYWORDS# can be added as well. The entries must satisfy the expression:
+            ///     [A-Z](_*[A-Z0-9]+)* or it will be an error.
+            /// </summary>
+            /// <returns>An action to be used inside of <see cref="Do" /></returns>
+            public static Action<Boilerplate, string> InstantiateScriptCodeTemplate(
+                TextAsset source, string targetScriptName, Dictionary<string, string> replacements,
+                bool errorOnIncompleteTags = false
+            ) {
+                return InstantiateTemplate(
+                    source, targetScriptName, TemplateReplacer.AddScriptTemplateVariables(
+                        targetScriptName, replacements
+                    ), errorOnIncompleteTags
+                );
             }
         }
     }
