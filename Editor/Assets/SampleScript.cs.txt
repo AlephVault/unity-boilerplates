@@ -1,8 +1,0 @@
-public class #SCRIPTNAME# {
-    #region constants
-    public const int FOO = #FOO#;
-    public const int BAR = #BAR#;
-    public const int BAZ = #BAZ#;
-    public const int QOO = #QOO#;
-    ##endregion constants
-}
