@@ -72,24 +72,24 @@ Consider this example for standard text generation:
 
 1. Assume you have a `TextAsset` having this content:
 
-```
-Hello my namy is #NAME#.
-My hair color is #HAIR_COLOR#.
-My age is #AGE#.
-```
+   ```
+   Hello my namy is #NAME#.
+   My hair color is #HAIR_COLOR#.
+   My age is #AGE#.
+   ```
 
 2. Assume you want to generate, out of that `TextAsset` asset (which is stored in the `userDataTextAsset` variable), a file in the Assets/TeamData directory, using your data. You'll write a piece of code (perhaps an action in the editor menu or a window?) that looks like this:
 
-```
-using AlephVault.Unity.Boilerplates.Utils;
+   ```
+   using AlephVault.Unity.Boilerplates.Utils;
 
-var boilerplate = new Boilerplate();
+   var boilerplate = new Boilerplate();
 
-boilerplate
-    .IntoDirectory("TeamData") // Create the Assets/TeamData if it does not exist, and move into.
-        .Do(Boilerplate.InstantiateTemplate(userDataTextAsset, "MyAwesomeFile", new Dictionary<string, string>() {{"AGE", "39"}, {"NAME", "Yamcha"}, {"HAIR_COLOR", "Black"}}))
-    .End(); // Move out of the TeamData directory, back to Assets.
-```
+   boilerplate
+       .IntoDirectory("TeamData") // Create the Assets/TeamData if it does not exist, and move into.
+           .Do(Boilerplate.InstantiateTemplate(userDataTextAsset, "MyAwesomeFile", new Dictionary<string, string>() {{"AGE", "39"}, {"NAME", "Yamcha"}, {"HAIR_COLOR", "Black"}}))
+       .End(); // Move out of the TeamData directory, back to Assets.
+   ```
 
 The variable `NAME`, `AGE` and `HAIR_COLOR` correspond to what is defined in the temaplte, and nothing else. They must exist, therein, with surrounding numeral/hash signs. Variables that are not defined in the template will just be ignored in the arguments dictionary.
 
