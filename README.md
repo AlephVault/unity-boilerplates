@@ -1,4 +1,4 @@
-# unity-boilerplates
+# Unity Boilerplates
 
 This project contains utilities to generate boilerplate code for a project.
 
