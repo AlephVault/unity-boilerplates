@@ -7,7 +7,7 @@ This project contains utilities to generate boilerplate code for a project.
 This package is not available in any UPM server. You must install it in your project like this:
 
 1. In Unity, with your project open, open the Package Manager.
-2. Either refer this Github project: https://github.com/AlephVault/unity-boilerplates.git or clone it locally and refer it from disk.
+2. Either refer this GitHub project: https://github.com/AlephVault/unity-boilerplates.git or clone it locally and refer it from disk.
 3. This package has no extra dependencies.
 
 # Usage
